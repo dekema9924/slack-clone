@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/layout/Header";
+import StarryBackground from "@/components/ui/StarryBackground";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,11 +26,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <div className="relative min-h-screen bg-linear-to-b from-[#0b1444] via-[#2a36c7] to-[#5865f2] overflow-hidden">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(88,101,242,0.35),transparent_65%)]  antialiased`}
+        >
+          <StarryBackground>
+            <Header />
+            {children}
+          </StarryBackground>
+        </body>
+      </div>
     </html>
   );
 }
