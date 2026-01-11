@@ -3,7 +3,7 @@
 import React from 'react'
 
 interface ButtonProps {
-    text: string
+    text: string | React.ReactElement
     className: string
 }
 

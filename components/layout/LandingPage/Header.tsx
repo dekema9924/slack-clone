@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react';
-import Button from '../ui/Button';
-import Logo from '../ui/Logo';
+import Button from '../../ui/Button';
+import Logo from '../../ui/Logo';
 import MobileNav from './MobileNav';
+import Link from 'next/link';
 
 export default function Header() {
     const [isMenuOpen, setMenuOpen] = useState<boolean>(false)
@@ -22,11 +23,10 @@ export default function Header() {
 
             </ul>
 
-
-            <Button
-                text='Login'
-                className='w-22 mr-10 border bg-white text-black hidden lg:flex items-center justify-center'
-            />
+            <Link className='w-22 h-9 rounded-md mr-10 border bg-white text-black hidden lg:flex items-center justify-center'
+                href={'/auth/sign-in'}>
+                Login
+            </Link>
 
             {/* //mobile menu  */}
             <div onClick={() => { setMenuOpen(true), console.log(isMenuOpen) }} className='lg:hidden w-9 mr-10 flex flex-col h-9 justify-center bg-blue-900 rounded-xl p-2 cursor-pointer'>

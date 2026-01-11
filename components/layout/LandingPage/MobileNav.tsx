@@ -1,7 +1,8 @@
 
 import { X } from 'lucide-react'
 import { Slack } from 'lucide-react'
-import Button from '../ui/Button'
+import Button from '../../ui/Button'
+import Link from 'next/link'
 
 
 interface props {
@@ -33,8 +34,6 @@ export default function MobileNav({ setMenuOpen, isMenuOpen }: props) {
                     <li className='btn_hover transition-all duration-500'>Safety</li>
                     <li className='btn_hover transition-all duration-500'>Auth</li>
 
-
-
                 </ul>
 
                 <div className='h-44 flex items-end'>
@@ -42,6 +41,11 @@ export default function MobileNav({ setMenuOpen, isMenuOpen }: props) {
                         text='Sign in'
                         className='w-11/12 bg-white text-blue-800 font-bold text-xl rounded-2xl! h-12 '
                     />
+                    {/* 
+                    <Link className='w-22 h-9 rounded-md mr-10 border bg-white text-black hidden lg:flex items-center justify-center'
+                        href={'/auth/sign-in'}>
+                        Login
+                    </Link> */}
                 </div>
             </nav>
         </>

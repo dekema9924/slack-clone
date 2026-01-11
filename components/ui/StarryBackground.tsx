@@ -13,11 +13,11 @@ export default function StarryBackground({ children }: { children: React.ReactNo
     return (
         <>
             {/* Stars container */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 ">
                 {stars.map((star) => (
                     <div
                         key={star.id}
-                        className="absolute rounded-full bg-white animate-pulse"
+                        className="absolute z-30 rounded-full bg-white animate-pulse"
                         style={{
                             left: star.left,
                             top: star.top,
