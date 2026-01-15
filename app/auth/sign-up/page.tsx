@@ -2,6 +2,9 @@
 import Link from "next/link"
 import { CircleAlert } from 'lucide-react';
 import { useForm, SubmitHandler } from "react-hook-form"
+import { signUp } from "@/lib/server/actions/authAction";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 
 interface FormInterface {
@@ -16,15 +19,34 @@ interface FormInterface {
 
 
 export default function SignUpPage() {
+    const router = useRouter()
     const { register,
         handleSubmit,
-        watch,
         reset,
         formState: { errors }
     } = useForm<FormInterface>()
 
-    const onSubmit: SubmitHandler<FormInterface> = (data) => {
-        console.log(data)
+    const onSubmit: SubmitHandler<FormInterface> = async (data) => {
+
+        //conver string to date
+        const dateString = `${data.birthMonth} ${data.birthDay} ${data.birthYear}`
+        const dateObj = new Date(dateString);
+
+        //create account logic
+        try {
+            const res = await signUp(data.email, data.password, data.displayName, data.userName, dateObj)
+            // console.log(res)
+            if (res.id) {
+                toast.success("user created successfully!")
+                reset()
+                router.push('/auth/sign-in')
+            }
+
+        } catch (error: any) {
+            toast.error(error.message)
+            console.error(error.message)
+
+        }
     }
 
 
@@ -67,7 +89,7 @@ export default function SignUpPage() {
                                         message: "Cannot be more than 10 characters"
                                     },
                                     minLength: {
-                                        value: 4,
+                                        value: 2,
                                         message: "display name too short"
                                     }
                                 })}
@@ -119,7 +141,12 @@ export default function SignUpPage() {
                                     pattern: {
                                         value: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
                                         message: "Password must contain at least one uppercase letter and one special character"
+                                    },
+                                    minLength: {
+                                        value: 8,
+                                        message: "Password must be at least 8 characters"
                                     }
+
                                 })}
                                 type="password"
                                 className="w-full bg-[#202225] border-none rounded px-3 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"

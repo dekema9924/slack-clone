@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/LandingPage/Header";
-import StarryBackground from "@/components/ui/StarryBackground";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} absolute text-white inset-0 bg-[radial-gradient(circle_at_top,rgba(88,101,242,0.35),transparent_65%)]  antialiased`}
       >
+        <Toaster />
         {children}
       </body>
     </html>
